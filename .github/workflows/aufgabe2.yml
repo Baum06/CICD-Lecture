@@ -30,7 +30,21 @@ jobs:
               name: junit-results
               path: target/surefire-reports/
               
-          - name: Lint
-            run: mvn checkstyle:check
+  lint:
+    name: Lint with Checkstyle
+    runs-on: ubuntu-latest
 
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run Checkstyle
+        run: mvn checkstyle:check
+
+      - name: Upload Checkstyle report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: checkstyle-report
+          path: target/checkstyle-result.xml
     
