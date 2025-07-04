@@ -31,7 +31,7 @@ jobs:
               path: target/surefire-reports/
               
   lint:
-    name: Lint with Checkstyle
+    name: Lint
     runs-on: ubuntu-latest
 
     steps:
@@ -39,7 +39,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run Checkstyle
-        run: mvn checkstyle:check
+        run: mvn checkstyle:checkstyle
 
       - name: Upload Checkstyle report
         if: always()
