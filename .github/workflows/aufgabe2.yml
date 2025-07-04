@@ -29,4 +29,8 @@ jobs:
             with:
               name: junit-results
               path: target/surefire-reports/
+              
+          - name: Lint
+            run: mvn checkstyle:check
+
     
