@@ -1,0 +1,32 @@
+name: aufgabe2
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build: 
+    runs-on: ubuntu-latest
+
+    steps:
+          - name: Set up JDK 21
+            uses: actions/setup-java@v4
+            with:
+              distribution: 'temurin'
+              java-version: '21'
+
+          - name: Checkout repository
+            uses: actions/checkout@v4
+
+          - name: run maven
+            run: mvn -B clean verify
+
+          - name: archiv
+            if: always()
+            uses: actions/upload-artifact@v4
+            with:
+              name: junit-results
+              path: target/surefire-reports/
+    
